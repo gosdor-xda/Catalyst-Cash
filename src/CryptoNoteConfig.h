@@ -30,7 +30,7 @@ const size_t   CRYPTONOTE_BLOCK_GRANTED_FULL_REWARD_ZONE_V1  = 100000;
 const size_t   CRYPTONOTE_BLOCK_GRANTED_FULL_REWARD_ZONE_CURRENT = CRYPTONOTE_BLOCK_GRANTED_FULL_REWARD_ZONE;
 const size_t   CRYPTONOTE_COINBASE_BLOB_RESERVED_SIZE        = 600;
 const size_t   CRYPTONOTE_DISPLAY_DECIMAL_POINT              = 8;
-const uint64_t MINIMUM_FEE                                   = 1000000; // for now Minimum fee would be 0.001 XAT for a while 
+const uint64_t MINIMUM_FEE                                   = 1000000; // for now Minimum fee would be 0.001 XAT for a while
 const uint64_t DEFAULT_DUST_THRESHOLD                        = 10000;
 const uint64_t MAX_TX_MIXIN_SIZE                             = 20;
 
@@ -72,7 +72,7 @@ const char     MINER_CONFIG_FILE_NAME[]                      = "miner_conf.json"
 } // parameters
 
 const char     CRYPTONOTE_NAME[]                             = "ethereum";
-const char     GENESIS_COINBASE_TX_HEX[]                     = "";
+const char     GENESIS_COINBASE_TX_HEX[]                     = "010a01ff000101029b2e4c0281c0b02e7c53291a94d1d0cbff8883f8024f5142ee494ffbbd0880712101e06feb374c93006720b15bd2fcbe2dc74f6c5b980bf2bc7d9d2d4759da9ebcbc";
 
 const uint8_t  CURRENT_TRANSACTION_VERSION                   =  1;
 const uint8_t  BLOCK_MAJOR_VERSION_1                         =  1;
@@ -108,7 +108,7 @@ const uint32_t P2P_IDLE_CONNECTION_KILL_INTERVAL             = (5 * 60);      //
 
 const char     P2P_STAT_TRUSTED_PUB_KEY[]                    = "FF9507CA55455F37A3B783EE2C5123B8B6A34A0C5CAAE050922C6254161480C1";
 
-const char* const SEED_NODES[] = { 
+const char* const SEED_NODES[] = {
   "178.128.202.229:17033",
 };
 
@@ -117,7 +117,7 @@ struct CheckpointData {
   const char* blockId;
 };
 
-const std::initializer_list<CheckpointData> CHECKPOINTS = { 
+const std::initializer_list<CheckpointData> CHECKPOINTS = {
   //{5000,	"3ac6a64e54c4d5ea39306a448ee029d0d4951905d4805c75136339c7c856fbf3" },
   //{50000,	"9a11d431afd847b87be29053185930215be477a1090c6c774f91169e290bad99" },
 };
@@ -125,4 +125,3 @@ const std::initializer_list<CheckpointData> CHECKPOINTS = {
 } // CryptoNote
 
 #define ALLOW_DEBUG_COMMANDS
-
