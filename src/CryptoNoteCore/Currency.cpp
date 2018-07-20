@@ -168,19 +168,13 @@ const std::vector<uint64_t> Currency::POWERS_OF_TEN = {
 		//assert(alreadyGeneratedCoins <= m_moneySupply);
 		assert(m_emissionSpeedFactor > 0 && m_emissionSpeedFactor <= 8 * sizeof(uint64_t));
                 uint64_t baseReward = (m_moneySupply - alreadyGeneratedCoins) >> m_emissionSpeedFactor;
-                     if (height == 1) {
+                     
+		if (height == 1) {
     			baseReward = m_genesisBlockReward;
     			std::cout << "Genesis block reward: " << baseReward << std::endl;
 		     }
-		// Tail emission
-		if (height >= 2) {
-                uint64_t bad_tail_emission_reward = uint64_t(70000000000);
-                if (alreadyGeneratedCoins + bad_tail_emission_reward >= m_moneySupply || baseReward > bad_tail_emission_reward)
-                {
-                    baseReward = bad_tail_emission_reward;
-                 }
-                 }
-                if (height >= 100000) {
+		
+                if (height >= 2) {
                 if (alreadyGeneratedCoins + CryptoNote::parameters::TAIL_EMISSION_REWARD >= m_moneySupply || baseReward <                   CryptoNote::parameters::TAIL_EMISSION_REWARD)
 		{
 		     baseReward = CryptoNote::parameters::TAIL_EMISSION_REWARD;
