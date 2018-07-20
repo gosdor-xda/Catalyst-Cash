@@ -167,19 +167,19 @@ const std::vector<uint64_t> Currency::POWERS_OF_TEN = {
 		uint64_t fee, uint64_t& reward, int64_t& emissionChange, uint32_t height) const {
 		//assert(alreadyGeneratedCoins <= m_moneySupply);
 		assert(m_emissionSpeedFactor > 0 && m_emissionSpeedFactor <= 8 * sizeof(uint64_t));
-                uint64_t baseReward = (m_moneySupply - alreadyGeneratedCoins) >> m_emissionSpeedFactor;
-                     
-		if (height == 1) {
-    			baseReward = m_genesisBlockReward;
-    			std::cout << "Genesis block reward: " << baseReward << std::endl;
-		     }
-		
-                if (height >= 2) {
-                if (alreadyGeneratedCoins + CryptoNote::parameters::TAIL_EMISSION_REWARD >= m_moneySupply || baseReward <                   CryptoNote::parameters::TAIL_EMISSION_REWARD)
-		{
-		     baseReward = CryptoNote::parameters::TAIL_EMISSION_REWARD;
-                 }
-                 }
+    uint64_t baseReward = (m_moneySupply - alreadyGeneratedCoins) >> m_emissionSpeedFactor;
+
+		if (alreadyGeneratedCoins == 0) {
+					 baseReward = 1;
+			 }
+
+			 if (alreadyGeneratedCoins == 1) {
+					 baseReward =m_moneySupply*0.04;
+			 }
+
+		if (alreadyGeneratedCoins + baseReward >= m_moneySupply) {
+							 baseReward = 0;
+					 }
 		size_t blockGrantedFullRewardZone = blockGrantedFullRewardZoneByBlockVersion(blockMajorVersion);
 		medianSize = std::max(medianSize, blockGrantedFullRewardZone);
 		if (currentBlockSize > UINT64_C(2) * medianSize) {
@@ -437,13 +437,13 @@ const std::vector<uint64_t> Currency::POWERS_OF_TEN = {
     // LWMA difficulty algorithm
     // Copyright (c) 2017-2018 Zawy
     // MIT license http://www.opensource.org/licenses/mit-license.php.
-    // This is an improved version of Tom Harding's (Deger8) "WT-144"  
+    // This is an improved version of Tom Harding's (Deger8) "WT-144"
     // Karbowanec, Masari, Bitcoin Gold, and Bitcoin Cash have contributed.
     // See https://github.com/zawy12/difficulty-algorithms/issues/1 for other algos.
     // Do not use "if solvetime < 0 then solvetime = 1" which allows a catastrophic exploit.
     // T= target_solvetime;
     // N = int(45 * (600 / T) ^ 0.3));
- 
+
     const int64_t T = static_cast<int64_t>(m_difficultyTarget);
     size_t N = m_difficultyWindow;
 
